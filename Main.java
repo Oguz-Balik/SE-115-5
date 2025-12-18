@@ -24,7 +24,7 @@ public class Main {
                 while (sc.hasNextLine()) {
                     String[] info = sc.nextLine().split(",");
 
-                    int day = Integer.parseInt(info[0]) - 1;
+                    int day = Integer.parseInt(info[0])-1;
                     String comm = info[1];
                     int profit = Integer.parseInt(info[2]);
 
@@ -118,7 +118,23 @@ public class Main {
     }
 
     public static String bestMonthForCommodity(String comm) {
-        return "DUMMY";
+       int bestcommmonth=-99999;
+       boolean tst=true;
+       String tst2="A";
+       for (int i=0;i<COMMS;i++){
+           if (comm.equals(commodities[i])){
+               tst=false;
+               for (int j=0;j<MONTHS;j++){
+                   if (mntlydata[j][i]>bestcommmonth){
+                       bestcommmonth=mntlydata[j][i];
+                       tst2=months[j];
+                   }
+               }
+               break;
+           }
+       }
+        if (tst) return "INVALID_COMMODITY";
+        return tst2;
     }
 
     public static int consecutiveLossDays(String comm) {
