@@ -21,6 +21,9 @@ public class Main {
         try {
             for (int p = 0; p < MONTHS; p++) {
                 Scanner sc = new Scanner(Paths.get("src/Data_Files/" + months[p] + ".txt"));
+                if (sc.hasNextLine()) {
+                    sc.nextLine();
+                }
                 while (sc.hasNextLine()) {
                     String[] info = sc.nextLine().split(",");
 
@@ -138,11 +141,45 @@ public class Main {
     }
 
     public static int consecutiveLossDays(String comm) {
-        return 1234;
+        boolean tst1=true;
+        int streak;
+        int streak0=0;
+        for (int i=0;i<COMMS;i++){
+            if (comm.equals(commodities[i])){
+                for (int j=0;j<MONTHS;j++){
+                    streak=0;
+                    for (int y=0;y<DAYS;y++){
+                        if (data[j][y][i]<0){
+                            streak++;
+                            if (streak>streak0) streak0=streak;
+                        }
+                        else streak=0;
+                    }
+                }
+                tst1=false;
+                break;
+            }
+        }
+        if (tst1) return -1;
+        return streak0;
     }
 
     public static int daysAboveThreshold(String comm, int threshold) {
-        return 1234;
+        boolean tst=true;
+        int counter=0;
+        for (int i=0;i<COMMS;i++){
+            if (comm.equals(commodities[i])){
+                for (int j=0;j<MONTHS;j++){
+                    for (int y=0;y<DAYS;y++){
+                        if (data[j][y][i]>=threshold) counter++;
+                    }
+                }
+                tst=false;
+                break;
+            }
+        }
+        if (tst) return -1;
+        return counter;
     }
 
     public static int biggestDailySwing(int month) {
