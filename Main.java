@@ -183,11 +183,57 @@ public class Main {
     }
 
     public static int biggestDailySwing(int month) {
-        return 1234;
+        if (month<0||month>11) return -99999;
+        int diff;
+        int maxdiff=-99999;
+        int dailyproft=0;
+        int dailyproft2=0;
+          for (int i=0;i<DAYS-1;i++){
+              dailyproft=0;
+              dailyproft2=0;
+              diff=0;
+              for (int j=0;j<COMMS;j++){
+                  dailyproft+=data[month][i][j];
+                  dailyproft2+=data[month][i+1][j];
+              }
+              diff=dailyproft-dailyproft2;
+              if (diff<0) diff=diff*-1;
+              if (diff>maxdiff) maxdiff=diff;
+          }
+
+        return maxdiff;
     }
 
     public static String compareTwoCommodities(String c1, String c2) {
-        return "DUMMY is better by 1234";
+        boolean tst1=true;
+        boolean tst2=true;
+        int comm1=0;
+        int comm2=0;
+        int ccmm1=0;
+        int ccmm2=0;
+        for (int i=0;i<COMMS;i++){
+            if (c1.equals(commodities[i])) {
+                tst1=false;
+                comm1=i;
+            }
+            if (c2.equals(commodities[i])){
+                tst2=false;
+                comm2=i;
+            }
+        }
+        if (tst1||tst2) return "INVALID_COMMODITY";
+        if (c1.equals(c2)) return "Equal";
+        for (int i=0;i<MONTHS;i++){
+            ccmm1+=mntlydata[i][comm1];
+            ccmm2+=mntlydata[i][comm2];
+        }
+        int diff=0;
+         if (ccmm1>ccmm2) diff=ccmm1-ccmm2;
+         else if (ccmm2>ccmm1) diff=ccmm2-ccmm1;
+        if (ccmm1==ccmm2) return "Equal";
+        if (ccmm1>ccmm2) return c1+" is better by "+diff;
+        else return c2+" is better by "+diff;
+
     }
 
     public static String bestWeekOfMonth(int month) {
