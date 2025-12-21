@@ -237,7 +237,47 @@ public class Main {
     }
 
     public static String bestWeekOfMonth(int month) {
-        return "DUMMY";
+        if (month<0||month>11) return "INVALID_MONTH";
+        int week=0;
+        int bestprft=-99999;
+        int prft=0;
+        for (int i=0;i<7;i++){
+            for (int j=0;j<COMMS;j++){
+                prft+=data[month][i][j];
+            }
+        }
+        if (prft>bestprft) {
+            bestprft=prft;
+            week=1;}
+        prft=0;
+        for (int i=7;i<14;i++){
+            for (int j=0;j<COMMS;j++){
+                prft+=data[month][i][j];
+            }
+        }
+        if (prft>bestprft) {
+            bestprft=prft;
+            week=2;}
+        prft=0;
+        for (int i=14;i<21;i++) {
+            for (int j=0;j<COMMS;j++){
+                prft+=data[month][i][j];
+            }
+        }
+        if (prft>bestprft) {
+            bestprft=prft;
+            week=3;}
+        prft=0;
+        for (int i=21;i<28;i++){
+            for (int j=0;j<COMMS;j++){
+                prft+=data[month][i][j];
+            }
+        }
+        if (prft>bestprft) {
+            bestprft=prft;
+            week=4;}
+
+        return "Week "+week;
     }
 
     public static void main(String[] args) {
